@@ -1,0 +1,26 @@
+# Core LLM & LangChain
+langchain
+langchain-community
+langchain-groq
+
+# Vector Store
+chromadb
+
+# Embeddings
+sentence-transformers
+
+# Document Processing
+pymupdf
+python-docx
+
+# Sparse Retrieval
+rank-bm25
+
+# Evaluation
+ragas
+
+# UI
+streamlit
+
+# Utilities
+python-dotenv
