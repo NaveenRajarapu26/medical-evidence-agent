@@ -10,6 +10,8 @@ __pycache__/
 # Vector store
 chroma_db/
 
+temp_uploads/
+
 # Database
 *.db
 *.sqlite
