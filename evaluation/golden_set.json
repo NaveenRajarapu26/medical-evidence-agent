@@ -1,0 +1,22 @@
+[
+  {
+    "question": "How much sodium should adults consume daily?",
+    "ground_truth": "Adults should consume less than 2,300 mg of sodium per day."
+  },
+  {
+    "question": "What are the recommended servings of vegetables per day?",
+    "ground_truth": "Adults should eat 2.5 to 3 cups of vegetables per day."
+  },
+  {
+    "question": "How much added sugar is recommended per day?",
+    "ground_truth": "Less than 10 percent of calories per day should come from added sugars."
+  },
+  {
+    "question": "What is the recommended amount of physical activity for adults?",
+    "ground_truth": "Adults should do at least 150 minutes of moderate physical activity per week."
+  },
+  {
+    "question": "How many cups of dairy are recommended daily?",
+    "ground_truth": "3 cups of dairy per day is recommended for adults."
+  }
+]
