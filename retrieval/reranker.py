@@ -1,17 +1,25 @@
 from typing import List, Dict, Any
-from sentence_transformers import CrossEncoder
 
-# Load reranker model once
-reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+# Lazy load reranker
+_reranker = None
+
+def get_reranker():
+    """Load reranker only when first needed."""
+    global _reranker
+    if _reranker is None:
+        from sentence_transformers import CrossEncoder
+        print("Loading reranker model...")
+        _reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+        print("Reranker loaded!")
+    return _reranker
 
 
-def rerank_results(query: str, 
-                   dense_results: List[Dict[str, Any]], 
-                   sparse_results: List[Dict[str, Any]], 
+def rerank_results(query: str,
+                   dense_results: List[Dict[str, Any]],
+                   sparse_results: List[Dict[str, Any]],
                    top_k: int = 5) -> List[Dict[str, Any]]:
     """Combine dense + sparse results and rerank using CrossEncoder."""
     
-    # Merge and deduplicate results
     seen_texts = set()
     combined = []
     
@@ -24,15 +32,13 @@ def rerank_results(query: str,
     if not combined:
         return []
     
-    # Rerank using CrossEncoder
+    reranker = get_reranker()
     pairs = [[query, result["text"]] for result in combined]
     scores = reranker.predict(pairs)
     
-    # Attach reranker scores
     for i, result in enumerate(combined):
         result["rerank_score"] = float(scores[i])
     
-    # Sort by reranker score
     reranked = sorted(combined, key=lambda x: x["rerank_score"], reverse=True)
     
     return reranked[:top_k]
