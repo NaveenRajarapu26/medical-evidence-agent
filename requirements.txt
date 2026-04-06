@@ -29,3 +29,6 @@ python-dotenv
 
 # Data
 datasets
+
+
+pytest
