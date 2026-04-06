@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - CHROMA_PERSIST_DIR=./chroma_db
+      - LANGCHAIN_TRACING_V2=false
+      - LANGCHAIN_API_KEY=dummy
+      - OPENAI_API_KEY=dummy
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./temp_uploads:/app/temp_uploads
